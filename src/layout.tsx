@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import PrimaryNavigation from "@/components/navigation/PrimaryNavigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/context/Authcontext";
 import QueryContext from "@/context/queryContext";
-import PrimaryNavigation from "@/components/navigation/PrimaryNavigation";
-import LoginPage from "./(auth)/login/page";
-
-
+import LoginView from "@/app/(auth)/login/page"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,9 +30,13 @@ export default async function RootLayout({
       <body className={inter.className}>
         <SessionProvider>
          <QueryContext>
-           {/* header */}
-        
-            {/* Body */}
+
+
+          {/* Header */}
+          <div className="bg-slate-500 flex items-center justify-end p-1">
+            <LoginView/>
+          </div>
+          {/* Body */}
           <div className="">{children}</div>
           </QueryContext>
         </SessionProvider>
